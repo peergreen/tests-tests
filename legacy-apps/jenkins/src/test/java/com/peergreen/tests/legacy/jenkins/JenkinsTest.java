@@ -35,7 +35,7 @@ public class JenkinsTest extends HtmlTest {
     @Deployment
     public static WebArchive createDeployment() {
 
-        MavenDependencyResolver resolver = DependencyResolvers.use(MavenDependencyResolver.class).goOffline();
+        MavenDependencyResolver resolver = DependencyResolvers.use(MavenDependencyResolver.class);
         WebArchive webArchive = resolver.artifact("org.jenkins-ci.main:jenkins-war:war:1.522").resolveAs(WebArchive.class).iterator().next();
         return webArchive;
     }
