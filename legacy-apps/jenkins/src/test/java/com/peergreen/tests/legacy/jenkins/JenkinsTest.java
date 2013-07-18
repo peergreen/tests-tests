@@ -9,6 +9,7 @@
  */
 package com.peergreen.tests.legacy.jenkins;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
@@ -36,6 +37,15 @@ public class JenkinsTest extends HtmlTest {
     public static WebArchive createDeployment() {
         MavenStrategyStage mavenStrategyStage = Maven.resolver().loadPomFromClassLoaderResource("legacy-jenkins-pom.xml").resolve("org.jenkins-ci.main:jenkins-war:war:1.522");
         WebArchive webArchive = mavenStrategyStage.withoutTransitivity().as(WebArchive.class)[0];
+
+        // cleanup Jenkins Home directory
+        String tmpDir = System.getProperty("java.io.tmpdir");
+        String username = System.getProperty("user.name");
+        File tmpFolder = new File(tmpDir, "peergreen-arquillian-jenkins-home-directory".concat(String.valueOf(username.hashCode())));
+        delete(tmpFolder);
+        System.setProperty("JENKINS_HOME", tmpFolder.getPath());
+
+
         return webArchive;
     }
 
