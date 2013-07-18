@@ -28,31 +28,6 @@
       <groupId>org.jboss.shrinkwrap.resolver</groupId>
       <artifactId>shrinkwrap-resolver-impl-maven</artifactId>
     </dependency>
-
-    <dependency>
-      <groupId>org.jenkins-ci.main</groupId>
-      <artifactId>jenkins-war</artifactId>
-      <type>war</type>
-      <!-- The version specified here should be the same than in the test -->
-      <version>1.522</version>
-      <scope>provided</scope>
-    </dependency>
-
   </dependencies>
-
-  <repositories>
-    <repository>
-      <id>jenkins-ci</id>
-      <name>jenkinsci-releases</name>
-      <url>http://repo.jenkins-ci.org/releases</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-
-  </repositories>
 
 </project>

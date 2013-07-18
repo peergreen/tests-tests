@@ -15,8 +15,8 @@ import java.net.URL;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
-import org.jboss.shrinkwrap.resolver.api.DependencyResolvers;
-import org.jboss.shrinkwrap.resolver.api.maven.MavenDependencyResolver;
+import org.jboss.shrinkwrap.resolver.api.maven.Maven;
+import org.jboss.shrinkwrap.resolver.api.maven.MavenStrategyStage;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,10 +32,8 @@ public class FelixWebConsoleTest extends HtmlTest {
 
     @Deployment
     public static JavaArchive createDeployment() {
-
-        MavenDependencyResolver resolver = DependencyResolvers.use(MavenDependencyResolver.class);
-
-        JavaArchive javaArchive = resolver.artifact("org.apache.felix:org.apache.felix.webconsole:jar:all:4.2.0").resolveAs(JavaArchive.class).iterator().next();
+        MavenStrategyStage mavenStrategyStage = Maven.resolver().resolve("org.apache.felix:org.apache.felix.webconsole:jar:all:4.2.0");
+        JavaArchive javaArchive = mavenStrategyStage.withoutTransitivity().as(JavaArchive.class)[0];
         return javaArchive;
     }
 

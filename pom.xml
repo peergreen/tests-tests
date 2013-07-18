@@ -40,6 +40,13 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
+        <groupId>org.jboss.shrinkwrap.resolver</groupId>
+        <artifactId>shrinkwrap-resolver-bom</artifactId>
+        <version>2.0.0</version>
+        <scope>import</scope>
+        <type>pom</type>
+      </dependency>
+      <dependency>
         <groupId>org.jboss.arquillian</groupId>
         <artifactId>arquillian-bom</artifactId>
         <version>${arquillian.version}</version>

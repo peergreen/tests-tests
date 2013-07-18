@@ -17,8 +17,8 @@ import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.resolver.api.DependencyResolvers;
-import org.jboss.shrinkwrap.resolver.api.maven.MavenDependencyResolver;
+import org.jboss.shrinkwrap.resolver.api.maven.Maven;
+import org.jboss.shrinkwrap.resolver.api.maven.MavenStrategyStage;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,9 +34,8 @@ public class JenkinsTest extends HtmlTest {
 
     @Deployment
     public static WebArchive createDeployment() {
-
-        MavenDependencyResolver resolver = DependencyResolvers.use(MavenDependencyResolver.class).goOffline();
-        WebArchive webArchive = resolver.artifact("org.jenkins-ci.main:jenkins-war:war:1.522").resolveAs(WebArchive.class).iterator().next();
+        MavenStrategyStage mavenStrategyStage = Maven.resolver().loadPomFromClassLoaderResource("legacy-jenkins-pom.xml").resolve("org.jenkins-ci.main:jenkins-war:war:1.522");
+        WebArchive webArchive = mavenStrategyStage.withoutTransitivity().as(WebArchive.class)[0];
         return webArchive;
     }
 
