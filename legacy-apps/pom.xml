@@ -27,6 +27,7 @@
 
   <modules>
     <module>jenkins</module>
+    <module>nexus</module>
     <module>felix-webconsole</module>
   </modules>
 
