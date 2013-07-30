@@ -26,7 +26,7 @@ public class Component {
 
     private UserTransaction setterUserTransaction;
 
-    @SuppressWarnings("unused")
+    @Resource
     private void setTx(UserTransaction setterUserTransaction) {
         this.setterUserTransaction = setterUserTransaction;
     }
